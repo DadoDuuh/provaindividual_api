@@ -2,9 +2,9 @@ import { consultarAnimes, inserirAnime } from "../Repository/animeRepository.js"
 import { Router } from 'express'
 const server = Router();
 
-server.post('/anime/', async (req, resp) => {
+server.post('/anime', async (req, resp) => {
     try{
-        const { animes } = req.body;
+        const animes = req.body;
         const animeInserido = await inserirAnime(animes);
         resp.send(animeInserido);
     } catch(err) {

@@ -1,13 +1,14 @@
 import { PostarAnime } from '../../api/anime.js';
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Cadastro() {
     const [nome, setNome] = useState('');
     const [sinopse, setSinopse] = useState('');
     const [lancamento, setLancamento] = useState('');
 
-    function salvarClick(){
-        PostarAnime(nome, sinopse, lancamento)
+    async function salvarClick(){
+        await PostarAnime(nome, sinopse, lancamento)
         alert('Anime Cadastrado!')
     }
     return (
@@ -19,18 +20,18 @@ export default function Cadastro() {
                   <div>
                       <label>Nome</label>
                       <input value={nome} onChange={e => setNome(e.target.value)}></input>
-  
+                        
                       <label>Sinopse</label>
                       <input value={sinopse} onChange={e => setSinopse(e.target.value)}></input>
   
                       <label>Lançamento</label>
-                      <input value={lancamento} onChange={e => setLancamento(e.target.value)}></input>
+                      <input type='date' value={lancamento} onChange={e => setLancamento(e.target.value)}></input>
                   </div>
                   <button onClick={salvarClick}>Salvar</button>
               </div>
 
               <div>
-                  <a to='/consulta'>Animes Cadastrados</a>
+                <Link to='/consulta'>Consultar animes</Link>
               </div>
           </div>
     );

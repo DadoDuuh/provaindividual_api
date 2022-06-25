@@ -3,8 +3,8 @@ const api = axios.create({
     baseURL: 'http://localhost:5000'
 })
 
-function PostarAnime(nome, sinopse, lancamento){
-    const resposta = api.post('/anime/', {
+async function PostarAnime(nome, sinopse, lancamento){
+    const resposta = await api.post('/anime', {
         nome: nome,
         sinopse: sinopse,
         lancamento: lancamento
@@ -12,8 +12,8 @@ function PostarAnime(nome, sinopse, lancamento){
     return resposta.data;
 }
 
-function RequisitarAnimes(){
-    const resposta = api.get('/consulta')
+async function RequisitarAnimes(){
+    const resposta = await api.get('/consulta')
     return resposta.data;
 }
 

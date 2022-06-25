@@ -1,15 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RequisitarAnimes } from "../../api/anime.js"
-import { useState } from 'react';
-
+import { Link } from "react-router-dom";
 
 
 export default function Consulta(){
     const [animes, setAnimes] = useState([]);
 
-    function carregarAnimes(){
-        const x = RequisitarAnimes();
-        setAnimes(x)
+    async function carregarAnimes(){
+        const x = await RequisitarAnimes();
+        setAnimes(x);
     }
     useEffect(() => {
         carregarAnimes();
@@ -17,22 +16,36 @@ export default function Consulta(){
 
     return(
         <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>SINOPSE</th>
+                        <th>LANÇAMENTO</th>
+                    </tr>
+                </thead>
+                <tbody>
             {animes.map(item => 
                 <tr>
                     <td>
-                        {item.nome}
+                        {item.id_anime}
                     </td>
                     <td>
-                        {item.sinopse}
+                        {item.nm_nome}
                     </td>
                     <td>
-                        {item.lancamento}
+                        {item.ds_sinopse}
+                    </td>
+                    <td>
+                        {item.dt_lancamento.substr(0,10 )}
                     </td>
                 </tr>
                 )}
-
+                </tbody>
+            </table>
                 <div>
-                    <a to='/'>Cadastrar novo</a>
+                    <Link to='/'>Cadastrar Novo</Link>
                 </div>
         </div>
     )
